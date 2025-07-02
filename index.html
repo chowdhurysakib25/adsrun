@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Watch Ads App</title>
+  <style>
+    /* Global Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Body */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #2e004f; /* গাঢ় পর্পল */
+      color: #ffffff;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Main container */
+    #main {
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    button {
+      background: #9400d3; /* উজ্জ্বল পর্পল */
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      color: #fff;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+
+    /* Ads overlay */
+    #adsOverlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    /* Grid for 4 iframes */
+    #adsGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 0.5rem;
+      width: 95%;
+      height: 80%;
+    }
+    #adsGrid iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 0.25rem;
+    }
+
+    /* Countdown */
+    #countdown {
+      margin-top: 1rem;
+      font-size: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="main">
+    <h1>ডিজিটাল মডার্ন প্রফেশনাল অ্যাপ</h1>
+    <button id="watchBtn">Watch Ads</button>
+  </div>
+
+  <div id="adsOverlay">
+    <div id="adsGrid"></div>
+    <div id="countdown">15</div>
+  </div>
+
+  <script>
+    const adsUrls = [
+      "https://www.profitableratecpm.com/bdzybu11?key=e97f59b1cf526641e2845ff0126bbb00",
+      "https://www.profitableratecpm.com/ss63b5t5i?key=072e475740859aa2c3a29d5e3e9b6907",
+      "https://www.profitableratecpm.com/yi33swu1?key=800e070089a310c8ce2562cfe91c8daa",
+      "https://www.profitableratecpm.com/j7g6x7kjb3?key=1e8836e90aadbea918276388fbf03c44"
+    ];
+
+    const watchBtn = document.getElementById('watchBtn');
+    const adsOverlay = document.getElementById('adsOverlay');
+    const adsGrid = document.getElementById('adsGrid');
+    const countdownEl = document.getElementById('countdown');
+
+    watchBtn.addEventListener('click', () => {
+      // গ্রিড ফাঁকা করে iframe যোগ করা
+      adsGrid.innerHTML = '';
+      adsUrls.forEach(url => {
+        const ifr = document.createElement('iframe');
+        ifr.src = url;
+        adsGrid.appendChild(ifr);
+      });
+
+      // কাউন্টডাউন শুরু
+      let timeLeft = 15;
+      countdownEl.textContent = timeLeft;
+      adsOverlay.style.display = 'flex';
+
+      const timer = setInterval(() => {
+        timeLeft--;
+        countdownEl.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          adsOverlay.style.display = 'none';
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
